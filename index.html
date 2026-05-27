@@ -13,7 +13,7 @@
             padding: 20px;
         }
         .container {
-            max-width: 900px;
+            max-width: 1200px;
             margin: 0 auto;
             background: white;
             padding: 30px;
@@ -37,55 +37,84 @@
             margin-bottom: 20px;
             border-radius: 4px;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
             margin-top: 20px;
         }
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        th {
+        .calendar-header {
             background-color: #2c3e50;
             color: white;
-            position: sticky;
-            top: 0;
-        }
-        tr:hover {
-            background-color: #f1f1f1;
-        }
-        .date-col {
-            width: 15%;
+            padding: 10px;
+            text-align: center;
             font-weight: bold;
-            color: #555;
+            border-radius: 4px;
         }
-        .author-col {
-            width: 25%;
+        .day-cell {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
         }
-        .title-col {
-            width: 60%;
+        .day-cell.empty {
+            background-color: #f9f9f9;
+            border-color: #eee;
+        }
+        .day-date {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+        }
+        .book-item {
+            font-size: 0.85em;
+            margin-bottom: 6px;
+            padding: 4px;
+            background-color: #f8f9fa;
+            border-radius: 3px;
+        }
+        .book-author {
+            color: #7f8c8d;
+            font-size: 0.8em;
+            margin-bottom: 2px;
+        }
+        .book-title {
+            color: #2c3e50;
         }
         .required {
-            font-weight: bold;
-            color: #d35400;
+            border-left: 3px solid #e74c3c;
+            background-color: #fdf2f0;
         }
         .badge {
             display: inline-block;
             padding: 2px 6px;
-            font-size: 0.8em;
+            font-size: 0.75em;
             border-radius: 4px;
-            background-color: #ffeaa7;
-            color: #d35400;
-            margin-left: 5px;
+            background-color: #e74c3c;
+            color: white;
+            margin-left: 4px;
             font-weight: normal;
+            vertical-align: middle;
         }
         .footer {
             margin-top: 30px;
             text-align: center;
             font-size: 0.9em;
             color: #777;
+        }
+        @media (max-width: 768px) {
+            .calendar-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        @media (max-width: 480px) {
+            .calendar-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -97,180 +126,303 @@
 
     <div class="info-box">
         <p><strong>Важно:</strong> Книги, отмеченные значком <span class="badge">Обязательно</span>, необходимо прочитать в первую очередь и завести дневник внеклассного чтения.</p>
-        <p>Расписание составлено так, чтобы чередовать короткие рассказы и большие повести.</p>
     </div>
 
-    <table>
-        <thead>
-            <tr>
-                <th class="date-col">Дата</th>
-                <th class="author-col">Автор</th>
-                <th class="title-col">Произведение</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="date-col">27 мая</td>
-                <td class="author-col">А.С. Пушкин</td>
-                <td class="title-col">«Сказка о мертвой царевне и о семи богатырях»</td>
-            </tr>
-            <tr>
-                <td class="date-col">30 мая</td>
-                <td class="author-col">И.А. Крылов</td>
-                <td class="title-col">«Волк и журавль», «Квартет» <span class="badge">Обязательно</span></td>
-            </tr>
-            <tr>
-                <td class="date-col">2 июня</td>
-                <td class="author-col">В.Ф. Одоевский</td>
-                <td class="title-col">«Городок в табакерке» <span class="badge">Обязательно</span></td>
-            </tr>
-            <tr>
-                <td class="date-col">5 июня</td>
-                <td class="author-col">В. Гаршин</td>
-                <td class="title-col">«Сказка о жабе и розе»</td>
-            </tr>
-            <tr>
-                <td class="date-col">8 июня</td>
-                <td class="author-col">М.Ю. Лермонтов</td>
-                <td class="title-col">«Ашик-Кериб»</td>
-            </tr>
-            <tr>
-                <td class="date-col">11 июня</td>
-                <td class="author-col">А.П. Чехов</td>
-                <td class="title-col">«Мальчики»</td>
-            </tr>
-            <tr>
-                <td class="date-col">14 июня</td>
-                <td class="author-col">С.Т. Аксаков</td>
-                <td class="title-col">«Аленький цветочек» <span class="badge">Обязательно</span></td>
-            </tr>
-            <tr>
-                <td class="date-col">17 июня</td>
-                <td class="author-col">Л. Андреев</td>
-                <td class="title-col">«Кусака»</td>
-            </tr>
-            <tr>
-                <td class="date-col">20 июня</td>
-                <td class="author-col">В. Бианки</td>
-                <td class="title-col">«Оранжевое горлышко»</td>
-            </tr>
-            <tr>
-                <td class="date-col">23 июня</td>
-                <td class="author-col">Д.Н. Мамин-Сибиряк</td>
-                <td class="title-col">«Приёмыш»</td>
-            </tr>
-            <tr>
-                <td class="date-col">26 июня</td>
-                <td class="author-col">А.И. Куприн</td>
-                <td class="title-col">«Барбос и Жулька»</td>
-            </tr>
-            <tr>
-                <td class="date-col">29 июня</td>
-                <td class="author-col">В.П. Астафьев</td>
-                <td class="title-col">«Стрижонок Скрип» <span class="badge">Обязательно</span></td>
-            </tr>
-            <tr>
-                <td class="date-col">2 июля</td>
-                <td class="author-col">П.П. Ершов</td>
-                <td class="title-col">«Конёк-Горбунок» <span class="badge">Обязательно</span></td>
-            </tr>
-            <tr>
-                <td class="date-col">5 июля</td>
-                <td class="author-col">П.П. Бажов</td>
-                <td class="title-col">«Серебряное копытце» <span class="badge">Обязательно</span></td>
-            </tr>
-            <tr>
-                <td class="date-col">8 июля</td>
-                <td class="author-col">Е. Шварц</td>
-                <td class="title-col">«Сказка о потерянном времени»</td>
-            </tr>
-            <tr>
-                <td class="date-col">11 июля</td>
-                <td class="author-col">Р. Брэдбери</td>
-                <td class="title-col">«Все лето в один день»</td>
-            </tr>
-            <tr>
-                <td class="date-col">14 июля</td>
-                <td class="author-col">К.Г. Паустовский</td>
-                <td class="title-col">«Корзина с еловыми шишками», «Дремучий медведь» <span class="badge">Обязательно</span></td>
-            </tr>
-            <tr>
-                <td class="date-col">17 июля</td>
-                <td class="author-col">М.М. Зощенко</td>
-                <td class="title-col">«Ёлка»</td>
-            </tr>
-            <tr>
-                <td class="date-col">20 июля</td>
-                <td class="author-col">Б.С. Житков</td>
-                <td class="title-col">«Как я ловил человечков»</td>
-            </tr>
-            <tr>
-                <td class="date-col">23 июля</td>
-                <td class="author-col">Г.Х. Андерсен</td>
-                <td class="title-col">«Русалочка»</td>
-            </tr>
-            <tr>
-                <td class="date-col">26 июля</td>
-                <td class="author-col">А. Сент-Экзюпери</td>
-                <td class="title-col">«Маленький принц» <span class="badge">Обязательно</span></td>
-            </tr>
-            <tr>
-                <td class="date-col">29 июля</td>
-                <td class="author-col">В. Драгунский</td>
-                <td class="title-col">«Главные реки», «Что любит Мишка»</td>
-            </tr>
-            <tr>
-                <td class="date-col">1 августа</td>
-                <td class="author-col">А. Толстой</td>
-                <td class="title-col">«Золотой ключик, или Приключения Буратино» <span class="badge">Обязательно</span></td>
-            </tr>
-            <tr>
-                <td class="date-col">5 августа</td>
-                <td class="author-col">Д. Барри</td>
-                <td class="title-col">«Питер Пен»</td>
-            </tr>
-            <tr>
-                <td class="date-col">9 августа</td>
-                <td class="author-col">Ф. Баум</td>
-                <td class="title-col">«Страна Оз»</td>
-            </tr>
-            <tr>
-                <td class="date-col">13 августа</td>
-                <td class="author-col">Т. Янссон</td>
-                <td class="title-col">Сказки про Муми-тролля</td>
-            </tr>
-            <tr>
-                <td class="date-col">17 августа</td>
-                <td class="author-col">А. Линдгрен</td>
-                <td class="title-col">«Малыш и Карлсон» <span class="badge">Обязательно</span></td>
-            </tr>
-            <tr>
-                <td class="date-col">21 августа</td>
-                <td class="author-col">Е. Велтистов</td>
-                <td class="title-col">«Приключения Электроника» <span class="badge">Обязательно</span></td>
-            </tr>
-            <tr>
-                <td class="date-col">25 августа</td>
-                <td class="author-col">К. Булычев</td>
-                <td class="title-col">«Путешествия Алисы» <span class="badge">Обязательно</span></td>
-            </tr>
-            <tr>
-                <td class="date-col">29 августа</td>
-                <td class="author-col">М. Твен</td>
-                <td class="title-col">«Приключения Тома Сойера» <span class="badge">Обязательно</span></td>
-            </tr>
-            <tr>
-                <td class="date-col">31 августа</td>
-                <td class="author-col">Д. Свифт</td>
-                <td class="title-col">«Путешествия Гулливера»</td>
-            </tr>
-            <tr>
-                <td class="date-col">1 сентября</td>
-                <td class="author-col">Н. Носов</td>
-                <td class="title-col">«Приключения Незнайки и его друзей» <span class="badge">Обязательно</span></td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="calendar-grid">
+        <div class="calendar-header">Пн</div>
+        <div class="calendar-header">Вт</div>
+        <div class="calendar-header">Ср</div>
+        <div class="calendar-header">Чт</div>
+        <div class="calendar-header">Пт</div>
+        <div class="calendar-header">Сб</div>
+        <div class="calendar-header">Вс</div>
+
+        <!-- Май 2026 -->
+        <div class="day-cell empty"></div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">27 мая</div>
+            <div class="book-item required">
+                <div class="book-author">А.С. Пушкин</div>
+                <div class="book-title">«Сказка о мёртвой царевне» <span class="badge">Обязательно</span></div>
+            </div>
+        </div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">30 мая</div>
+            <div class="book-item">
+                <div class="book-author">И.А. Крылов</div>
+                <div class="book-title">«Волк и журавль», «Квартет»</div>
+            </div>
+        </div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell empty"></div>
+
+        <!-- Июнь 2026 -->
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">2 июня</div>
+            <div class="book-item">
+                <div class="book-author">В.Ф. Одоевский</div>
+                <div class="book-title">«Городок в табакерке»</div>
+            </div>
+        </div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">5 июня</div>
+            <div class="book-item">
+                <div class="book-author">В. Гаршин</div>
+                <div class="book-title">«Сказка о жабе и розе»</div>
+            </div>
+        </div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">8 июня</div>
+            <div class="book-item">
+                <div class="book-author">М.Ю. Лермонтов</div>
+                <div class="book-title">«Ашик-Кериб»</div>
+            </div>
+        </div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">11 июня</div>
+            <div class="book-item">
+                <div class="book-author">А.П. Чехов</div>
+                <div class="book-title">«Мальчики»</div>
+            </div>
+        </div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">14 июня</div>
+            <div class="book-item">
+                <div class="book-author">С.Т. Аксаков</div>
+                <div class="book-title">«Аленький цветочек»</div>
+            </div>
+        </div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">17 июня</div>
+            <div class="book-item">
+                <div class="book-author">Л. Андреев</div>
+                <div class="book-title">«Кусака»</div>
+            </div>
+        </div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">20 июня</div>
+            <div class="book-item">
+                <div class="book-author">В. Бианки</div>
+                <div class="book-title">«Оранжевое горлышко»</div>
+            </div>
+        </div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">23 июня</div>
+            <div class="book-item">
+                <div class="book-author">Д.Н. Мамин-Сибиряк</div>
+                <div class="book-title">«Приёмыш»</div>
+            </div>
+        </div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">26 июня</div>
+            <div class="book-item">
+                <div class="book-author">А.И. Куприн</div>
+                <div class="book-title">«Барбос и Жулька»</div>
+            </div>
+        </div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">29 июня</div>
+            <div class="book-item">
+                <div class="book-author">В.П. Астафьев</div>
+                <div class="book-title">«Стрижонок Скрип»</div>
+            </div>
+        </div>
+
+        <!-- Июль 2026 -->
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">2 июля</div>
+            <div class="book-item required">
+                <div class="book-author">П.П. Ершов</div>
+                <div class="book-title">«Конёк-Горбунок» <span class="badge">Обязательно</span></div>
+            </div>
+        </div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">5 июля</div>
+            <div class="book-item">
+                <div class="book-author">П.П. Бажов</div>
+                <div class="book-title">«Серебряное копытце»</div>
+            </div>
+        </div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">8 июля</div>
+            <div class="book-item">
+                <div class="book-author">Е. Шварц</div>
+                <div class="book-title">«Сказка о потерянном времени»</div>
+            </div>
+        </div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">11 июля</div>
+            <div class="book-item">
+                <div class="book-author">Р. Брэдбери</div>
+                <div class="book-title">«Все лето в один день»</div>
+            </div>
+        </div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">14 июля</div>
+            <div class="book-item">
+                <div class="book-author">К.Г. Паустовский</div>
+                <div class="book-title">«Корзина с еловыми шишками»</div>
+            </div>
+        </div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">17 июля</div>
+            <div class="book-item">
+                <div class="book-author">М.М. Зощенко</div>
+                <div class="book-title">«Ёлка»</div>
+            </div>
+        </div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">20 июля</div>
+            <div class="book-item">
+                <div class="book-author">Б.С. Житков</div>
+                <div class="book-title">«Как я ловил человечков»</div>
+            </div>
+        </div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">23 июля</div>
+            <div class="book-item">
+                <div class="book-author">Г.Х. Андерсен</div>
+                <div class="book-title">«Русалочка»</div>
+            </div>
+        </div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">26 июля</div>
+            <div class="book-item required">
+                <div class="book-author">А. Сент-Экзюпери</div>
+                <div class="book-title">«Маленький принц» <span class="badge">Обязательно</span></div>
+            </div>
+        </div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">29 июля</div>
+            <div class="book-item">
+                <div class="book-author">В. Драгунский</div>
+                <div class="book-title">«Главные реки», «Что любит Мишка»</div>
+            </div>
+        </div>
+
+        <!-- Август 2026 -->
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">1 августа</div>
+            <div class="book-item required">
+                <div class="book-author">А. Толстой</div>
+                <div class="book-title">«Золотой ключик» <span class="badge">Обязательно</span></div>
+            </div>
+        </div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">5 августа</div>
+            <div class="book-item">
+                <div class="book-author">Д. Барри</div>
+                <div class="book-title">«Питер Пен»</div>
+            </div>
+        </div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">9 августа</div>
+            <div class="book-item">
+                <div class="book-author">Ф. Баум</div>
+                <div class="book-title">«Страна Оз»</div>
+            </div>
+        </div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">13 августа</div>
+            <div class="book-item">
+                <div class="book-author">Т. Янссон</div>
+                <div class="book-title">Сказки про Муми-тролля</div>
+            </div>
+        </div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">17 августа</div>
+            <div class="book-item required">
+                <div class="book-author">А. Линдгрен</div>
+                <div class="book-title">«Малыш и Карлсон» <span class="badge">Обязательно</span></div>
+            </div>
+        </div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">21 августа</div>
+            <div class="book-item">
+                <div class="book-author">Е. Велтистов</div>
+                <div class="book-title">«Приключения Электроника»</div>
+            </div>
+        </div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">25 августа</div>
+            <div class="book-item required">
+                <div class="book-author">К. Булычев</div>
+                <div class="book-title">«Путешествия Алисы» <span class="badge">Обязательно</span></div>
+            </div>
+        </div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">29 августа</div>
+            <div class="book-item required">
+                <div class="book-author">М. Твен</div>
+                <div class="book-title">«Приключения Тома Сойера» <span class="badge">Обязательно</span></div>
+            </div>
+        </div>
+
+        <!-- Сентябрь 2026 -->
+        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">1 сентября</div>
+            <div class="book-item required">
+                <div class="book-author">Н. Носов</div>
+                <div class="book-title">«Приключения Незнайки» <span class="badge">Обязательно</span></div>
+            </div>
+        </div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell empty"></div>
+        <div class="day-cell empty"></div>
+    </div>
 
     <div class="footer">
         <p>Не забудьте завести дневник внеклассного чтения (Дата, Автор, Название, Герои).</p>
