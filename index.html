@@ -1,828 +1,179 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Летнее чтение: Переход в 3 класс</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f7f6;
-            color: #333;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        }
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-        }
-        h2 {
-            text-align: center;
-            color: #7f8c8d;
-            font-size: 1.2em;
-            margin-bottom: 30px;
-        }
-        .info-box {
-            background-color: #e8f4fd;
-            border-left: 5px solid #2196F3;
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 4px;
-        }
-        .book-list {
-            margin-bottom: 30px;
-        }
-        .book-list h3 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-        }
-        .book-list table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 10px;
-        }
-        .book-list th, .book-list td {
-            padding: 8px 12px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-        .book-list th {
-            background-color: #f8f9fa;
-            font-weight: bold;
-        }
-        .book-list tr:hover {
-            background-color: #f5f5f5;
-        }
-        .required-mark {
-            color: #e74c3c;
-            font-weight: bold;
-        }
-        .calendar-grid {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 8px;
-            margin-top: 20px;
-        }
-        .calendar-header {
-            background-color: #2c3e50;
-            color: white;
-            padding: 10px;
-            text-align: center;
-            font-weight: bold;
-            border-radius: 4px;
-        }
-        .day-cell {
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            padding: 8px;
-            min-height: 120px;
-            display: flex;
-            flex-direction: column;
-        }
-        .day-cell.empty {
-            background-color: #f9f9f9;
-            border-color: #eee;
-        }
-        .day-date {
-            font-weight: bold;
-            color: #2c3e50;
-            margin-bottom: 6px;
-            font-size: 0.85em;
-            text-align: center;
-        }
-        .reading-block {
-            font-size: 0.7em;
-            padding: 3px 5px;
-            border-radius: 3px;
-            margin-bottom: 3px;
-            color: #fff;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            text-align: center;
-        }
-        .reading-title {
-            font-weight: bold;
-            margin-bottom: 2px;
-        }
-        .reading-author {
-            font-size: 0.85em;
-            opacity: 0.9;
-        }
-        .required-badge {
-            display: inline-block;
-            padding: 1px 4px;
-            font-size: 0.7em;
-            border-radius: 3px;
-            background-color: rgba(255,255,255,0.3);
-            color: white;
-            margin-top: 2px;
-            font-weight: bold;
-        }
-        .footer {
-            margin-top: 30px;
-            text-align: center;
-            font-size: 0.9em;
-            color: #777;
-        }
-        @media (max-width: 1024px) {
-            .calendar-grid {
-                grid-template-columns: repeat(5, 1fr);
-            }
-        }
-        @media (max-width: 768px) {
-            .calendar-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-        @media (max-width: 480px) {
-            .calendar-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Летнее чтение: Переход в 3 класс</title>
+<style>
+body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;background:#f4f7f6;color:#333;margin:0;padding:20px}
+.container{max-width:1400px;margin:0 auto;background:#fff;padding:30px;border-radius:10px;box-shadow:0 4px 15px rgba(0,0,0,0.1)}
+h1{text-align:center;color:#2c3e50}
+h2{text-align:center;color:#7f8c8d;font-size:1.2em;margin-bottom:30px}
+.info-box{background:#e8f4fd;border-left:5px solid #2196F3;padding:15px;margin-bottom:20px;border-radius:4px}
+.book-list{margin-bottom:30px}
+.book-list h3{color:#2c3e50;border-bottom:2px solid #3498db;padding-bottom:10px}
+.book-list table{width:100%;border-collapse:collapse;margin-top:10px}
+.book-list th,.book-list td{padding:8px 12px;text-align:left;border-bottom:1px solid #ddd}
+.book-list th{background:#f8f9fa;font-weight:bold}
+.book-list tr:hover{background:#f5f5f5}
+.required-mark{color:#e74c3c;font-weight:bold}
+.calendar-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;margin-top:20px}
+.calendar-header{background:#2c3e50;color:#fff;padding:10px;text-align:center;font-weight:bold;border-radius:4px}
+.day-cell{background:#fff;border:1px solid #ddd;border-radius:4px;padding:8px;min-height:120px;display:flex;flex-direction:column}
+.day-cell.empty{background:#f9f9f9;border-color:#eee}
+.day-date{font-weight:bold;color:#2c3e50;margin-bottom:6px;font-size:0.85em;text-align:center}
+.reading-block{font-size:0.7em;padding:3px 5px;border-radius:3px;margin-bottom:3px;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,0.3);flex-grow:1;display:flex;flex-direction:column;justify-content:center;text-align:center}
+.reading-title{font-weight:bold;margin-bottom:2px}
+.reading-author{font-size:0.85em;opacity:0.9}
+.required-badge{display:inline-block;padding:1px 4px;font-size:0.7em;border-radius:3px;background:rgba(255,255,255,0.3);color:#fff;margin-top:2px;font-weight:bold}
+.footer{margin-top:30px;text-align:center;font-size:0.9em;color:#777}
+@media(max-width:1024px){.calendar-grid{grid-template-columns:repeat(5,1fr)}}
+@media(max-width:768px){.calendar-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:480px){.calendar-grid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
-
 <div class="container">
-    <h1>План летнего чтения: 2-3 класс</h1>
-    <h2>Календарь чтения: 27 мая — 1 сентября 2026</h2>
-    
-    <div class="info-box">
-        <p><strong>Расчет:</strong> Скорость чтения 90 слов/мин × 1 час = 5400 слов в день. Количество дней для каждой книги рассчитано исходя из её объема.</p>
-    </div>
-
-    <div class="book-list">
-        <h3>Список книг</h3>
-        <table>
-            <tr>
-                <th>№</th>
-                <th>Автор</th>
-                <th>Произведение</th>
-                <th>Статус</th>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>А.С. Пушкин</td>
-                <td>Сказка о мертвой царевне и о семи богатырях</td>
-                <td><span class="required-mark">Обязательно</span></td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>И.А. Крылов</td>
-                <td>Волк и журавль, Квартет</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>В.Ф. Одоевский</td>
-                <td>Городок в табакерке</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>4</td>
-                <td>В. Гаршин</td>
-                <td>Сказка о жабе и розе</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>5</td>
-                <td>М.Ю. Лермонтов</td>
-                <td>Ашик-Кериб</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>6</td>
-                <td>А.П. Чехов</td>
-                <td>Мальчики</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>7</td>
-                <td>С.Т. Аксаков</td>
-                <td>Аленький цветочек</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>8</td>
-                <td>Л. Андреев</td>
-                <td>Кусака</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>9</td>
-                <td>В. Бианки</td>
-                <td>Оранжевое горлышко</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>10</td>
-                <td>Д.Н. Мамин-Сибиряк</td>
-                <td>Приёмыш</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>11</td>
-                <td>А.И. Куприн</td>
-                <td>Барбос и Жулька</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>12</td>
-                <td>В.П. Астафьев</td>
-                <td>Стрижонок Скрип</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>13</td>
-                <td>П.П. Ершов</td>
-                <td>Конёк-Горбунок</td>
-                <td><span class="required-mark">Обязательно</span></td>
-            </tr>
-            <tr>
-                <td>14</td>
-                <td>П.П. Бажов</td>
-                <td>Серебряное копытце</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>15</td>
-                <td>Е. Шварц</td>
-                <td>Сказка о потерянном времени</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>16</td>
-                <td>Р. Брэдбери</td>
-                <td>Все лето в один день</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>17</td>
-                <td>К.Г. Паустовский</td>
-                <td>Корзина с еловыми шишками, Дремучий медведь</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>18</td>
-                <td>М.М. Зощенко</td>
-                <td>Ёлка</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>19</td>
-                <td>Б.С. Житков</td>
-                <td>Как я ловил человечков</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>20</td>
-                <td>Г.Х. Андерсен</td>
-                <td>Русалочка</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>21</td>
-                <td>А. Сент-Экзюпери</td>
-                <td>Маленький принц</td>
-                <td><span class="required-mark">Обязательно</span></td>
-            </tr>
-            <tr>
-                <td>22</td>
-                <td>В. Драгунский</td>
-                <td>Главные реки, Что любит Мишка</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>23</td>
-                <td>А. Толстой</td>
-                <td>Золотой ключик, или Приключения Буратино</td>
-                <td><span class="required-mark">Обязательно</span></td>
-            </tr>
-            <tr>
-                <td>24</td>
-                <td>Д. Барри</td>
-                <td>Питер Пен</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>25</td>
-                <td>Ф. Баум</td>
-                <td>Страна Оз</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>26</td>
-                <td>Т. Янссон</td>
-                <td>Сказки про Муми-тролля</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>27</td>
-                <td>А. Линдгрен</td>
-                <td>Малыш и Карлсон</td>
-                <td><span class="required-mark">Обязательно</span></td>
-            </tr>
-            <tr>
-                <td>28</td>
-                <td>Е. Велтистов</td>
-                <td>Приключения Электроника</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>29</td>
-                <td>К. Булычев</td>
-                <td>Путешествия Алисы</td>
-                <td><span class="required-mark">Обязательно</span></td>
-            </tr>
-            <tr>
-                <td>30</td>
-                <td>М. Твен</td>
-                <td>Приключения Тома Сойера</td>
-                <td><span class="required-mark">Обязательно</span></td>
-            </tr>
-            <tr>
-                <td>31</td>
-                <td>Д. Свифт</td>
-                <td>Путешествия Гулливера</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>32</td>
-                <td>Н. Носов</td>
-                <td>Приключения Незнайки и его друзей</td>
-                <td><span class="required-mark">Обязательно</span></td>
-            </tr>
-        </table>
-    </div>
-
-    <div class="calendar-grid">
-        <div class="calendar-header">Пн</div>
-        <div class="calendar-header">Вт</div>
-        <div class="calendar-header">Ср</div>
-        <div class="calendar-header">Чт</div>
-        <div class="calendar-header">Пт</div>
-        <div class="calendar-header">Сб</div>
-        <div class="calendar-header">Вс</div>
-        <div class="day-cell empty"></div>
-        <div class="day-cell empty"></div>
-        <div class="day-cell">
-            <div class="day-date">27 мая</div>
-            <div class="reading-block" style="background-color: #e74c3c;">
-                <div class="reading-title">Сказка о мертвой царевне и о семи богатырях</div>
-                <div class="reading-author">А.С. Пушкин</div>
-                <div class="required-badge">Обязательно</div>
-            </div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">28 мая</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">29 мая</div>
-            <div class="reading-block" style="background-color: #3498db;">
-                <div class="reading-title">Волк и журавль, Квартет</div>
-                <div class="reading-author">И.А. Крылов</div>
-                
-            </div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">30 мая</div>
-            <div class="reading-block" style="background-color: #9b59b6;">
-                <div class="reading-title">Городок в табакерке</div>
-                <div class="reading-author">В.Ф. Одоевский</div>
-                
-            </div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">31 мая</div>
-            <div class="reading-block" style="background-color: #1abc9c;">
-                <div class="reading-title">Сказка о жабе и розе</div>
-                <div class="reading-author">В. Гаршин</div>
-                
-            </div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">1 июня</div>
-            <div class="reading-block" style="background-color: #f39c12;">
-                <div class="reading-title">Ашик-Кериб</div>
-                <div class="reading-author">М.Ю. Лермонтов</div>
-                
-            </div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">2 июня</div>
-            <div class="reading-block" style="background-color: #2ecc71;">
-                <div class="reading-title">Мальчики</div>
-                <div class="reading-author">А.П. Чехов</div>
-                
-            </div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">3 июня</div>
-            <div class="reading-block" style="background-color: #e67e22;">
-                <div class="reading-title">Аленький цветочек</div>
-                <div class="reading-author">С.Т. Аксаков</div>
-                
-            </div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">4 июня</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">5 июня</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">6 июня</div>
-            <div class="reading-block" style="background-color: #95a5a6;">
-                <div class="reading-title">Кусака</div>
-                <div class="reading-author">Л. Андреев</div>
-                
-            </div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">7 июня</div>
-            <div class="reading-block" style="background-color: #16a085;">
-                <div class="reading-title">Оранжевое горлышко</div>
-                <div class="reading-author">В. Бианки</div>
-                
-            </div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">8 июня</div>
-            <div class="reading-block" style="background-color: #d35400;">
-                <div class="reading-title">Приёмыш</div>
-                <div class="reading-author">Д.Н. Мамин-Сибиряк</div>
-                
-            </div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">9 июня</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">10 июня</div>
-            <div class="reading-block" style="background-color: #7f8c8d;">
-                <div class="reading-title">Барбос и Жулька</div>
-                <div class="reading-author">А.И. Куприн</div>
-                
-            </div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">11 июня</div>
-            <div class="reading-block" style="background-color: #27ae60;">
-                <div class="reading-title">Стрижонок Скрип</div>
-                <div class="reading-author">В.П. Астафьев</div>
-                
-            </div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">12 июня</div>
-            <div class="reading-block" style="background-color: #8e44ad;">
-                <div class="reading-title">Конёк-Горбунок</div>
-                <div class="reading-author">П.П. Ершов</div>
-                <div class="required-badge">Обязательно</div>
-            </div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">13 июня</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">14 июня</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">15 июня</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">16 июня</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">17 июня</div>
-            <div class="reading-block" style="background-color: #c0392b;">
-                <div class="reading-title">Серебряное копытце</div>
-                <div class="reading-author">П.П. Бажов</div>
-                
-            </div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">18 июня</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">19 июня</div>
-            <div class="reading-block" style="background-color: #2980b9;">
-                <div class="reading-title">Сказка о потерянном времени</div>
-                <div class="reading-author">Е. Шварц</div>
-                
-            </div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">20 июня</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">21 июня</div>
-            <div class="reading-block" style="background-color: #f1c40f;">
-                <div class="reading-title">Все лето в один день</div>
-                <div class="reading-author">Р. Брэдбери</div>
-                
-            </div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">22 июня</div>
-            <div class="reading-block" style="background-color: #34495e;">
-                <div class="reading-title">Корзина с еловыми шишками, Дремучий медведь</div>
-                <div class="reading-author">К.Г. Паустовский</div>
-                
-            </div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">23 июня</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">24 июня</div>
-            <div class="reading-block" style="background-color: #9b59b6;">
-                <div class="reading-title">Ёлка</div>
-                <div class="reading-author">М.М. Зощенко</div>
-                
-            </div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">25 июня</div>
-            <div class="reading-block" style="background-color: #1abc9c;">
-                <div class="reading-title">Как я ловил человечков</div>
-                <div class="reading-author">Б.С. Житков</div>
-                
-            </div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">26 июня</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">27 июня</div>
-            <div class="reading-block" style="background-color: #e74c3c;">
-                <div class="reading-title">Русалочка</div>
-                <div class="reading-author">Г.Х. Андерсен</div>
-                
-            </div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">28 июня</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">29 июня</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">30 июня</div>
-            <div class="reading-block" style="background-color: #3498db;">
-                <div class="reading-title">Маленький принц</div>
-                <div class="reading-author">А. Сент-Экзюпери</div>
-                <div class="required-badge">Обязательно</div>
-            </div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">1 июля</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">2 июля</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">3 июля</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">4 июля</div>
-            <div class="reading-block" style="background-color: #2ecc71;">
-                <div class="reading-title">Главные реки, Что любит Мишка</div>
-                <div class="reading-author">В. Драгунский</div>
-                
-            </div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">5 июля</div>
-            <div class="reading-block" style="background-color: #e67e22;">
-                <div class="reading-title">Золотой ключик, или Приключения Буратино</div>
-                <div class="reading-author">А. Толстой</div>
-                <div class="required-badge">Обязательно</div>
-            </div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">6 июля</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">7 июля</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">8 июля</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">9 июля</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">10 июля</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">11 июля</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">12 июля</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">13 июля</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">14 июля</div>
-            <div class="reading-block" style="background-color: #95a5a6;">
-                <div class="reading-title">Питер Пен</div>
-                <div class="reading-author">Д. Барри</div>
-                
-            </div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">15 июля</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">16 июля</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">17 июля</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">18 июля</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">19 июля</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">20 июля</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">21 июля</div>
-            <div class="reading-block" style="background-color: #16a085;">
-                <div class="reading-title">Страна Оз</div>
-                <div class="reading-author">Ф. Баум</div>
-                
-            </div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">22 июля</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">23 июля</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">24 июля</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">25 июля</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">26 июля</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">27 июля</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">28 июля</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">29 июля</div>
-            <div class="reading-block" style="background-color: #d35400;">
-                <div class="reading-title">Сказки про Муми-тролля</div>
-                <div class="reading-author">Т. Янссон</div>
-                
-            </div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">30 июля</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">31 июля</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">1 августа</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">2 августа</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">3 августа</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">4 августа</div>
-            <div class="reading-block" style="background-color: #7f8c8d;">
-                <div class="reading-title">Малыш и Карлсон</div>
-                <div class="reading-author">А. Линдгрен</div>
-                <div class="required-badge">Обязательно</div>
-            </div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">5 августа</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">6 августа</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">7 августа</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">8 августа</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">9 августа</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">10 августа</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">11 августа</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">12 августа</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">13 августа</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">14 августа</div>
-            <div class="reading-block" style="background-color: #27ae60;">
-                <div class="reading-title">Приключения Электроника</div>
-                <div class="reading-author">Е. Велтистов</div>
-                
-            </div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">15 августа</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">16 августа</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">17 августа</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">18 августа</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">19 августа</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">20 августа</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">21 августа</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">22 августа</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">23 августа</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">24 августа</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">25 августа</div>
-            <div class="reading-block" style="background-color: #8e44ad;">
-                <div class="reading-title">Путешествия Алисы</div>
-                <div class="reading-author">К. Булычев</div>
-                <div class="required-badge">Обязательно</div>
-            </div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">26 августа</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">27 августа</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">28 августа</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">29 августа</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">30 августа</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">31 августа</div>
-        </div>
-        <div class="day-cell">
-            <div class="day-date">1 сентября</div>
-        </div>
-    </div>
-
-    <div class="footer">
-        <p>Счастливого чтения!</p>
-    </div>
-</div>
-
-</body>
-</html>
+<h1>План летнего чтения: 2-3 класс</h1>
+<h2>Календарь чтения: 27 мая — 1 сентября 2026</h2>
+<div class="info-box"><p><strong>Расчет:</strong> Скорость чтения 90 слов/мин × 1 час = 5400 слов в день. Книги расположены: сначала обязательные, затем необязательные.</p></div>
+<div class="book-list"><h3>Список книг</h3><table><tr><th>№</th><th>Автор</th><th>Произведение</th><th>Статус</th></tr>
+<tr><td>1</td><td>А.С. Пушкин</td><td>Сказка о мертвой царевне и о семи богатырях</td><td><span class="required-mark">Обязательно</span></td></tr>
+<tr><td>2</td><td>П.П. Ершов</td><td>Конёк-Горбунок</td><td><span class="required-mark">Обязательно</span></td></tr>
+<tr><td>3</td><td>А. Сент-Экзюпери</td><td>Маленький принц</td><td><span class="required-mark">Обязательно</span></td></tr>
+<tr><td>4</td><td>А. Толстой</td><td>Золотой ключик, или Приключения Буратино</td><td><span class="required-mark">Обязательно</span></td></tr>
+<tr><td>5</td><td>А. Линдгрен</td><td>Малыш и Карлсон</td><td><span class="required-mark">Обязательно</span></td></tr>
+<tr><td>6</td><td>К. Булычев</td><td>Путешествия Алисы</td><td><span class="required-mark">Обязательно</span></td></tr>
+<tr><td>7</td><td>М. Твен</td><td>Приключения Тома Сойера</td><td><span class="required-mark">Обязательно</span></td></tr>
+<tr><td>8</td><td>Н. Носов</td><td>Приключения Незнайки и его друзей</td><td><span class="required-mark">Обязательно</span></td></tr>
+<tr><td>9</td><td>И.А. Крылов</td><td>Волк и журавль, Квартет</td><td></td></tr>
+<tr><td>10</td><td>В.Ф. Одоевский</td><td>Городок в табакерке</td><td></td></tr>
+<tr><td>11</td><td>В. Гаршин</td><td>Сказка о жабе и розе</td><td></td></tr>
+<tr><td>12</td><td>М.Ю. Лермонтов</td><td>Ашик-Кериб</td><td></td></tr>
+<tr><td>13</td><td>А.П. Чехов</td><td>Мальчики</td><td></td></tr>
+<tr><td>14</td><td>С.Т. Аксаков</td><td>Аленький цветочек</td><td></td></tr>
+<tr><td>15</td><td>Л. Андреев</td><td>Кусака</td><td></td></tr>
+<tr><td>16</td><td>В. Бианки</td><td>Оранжевое горлышко</td><td></td></tr>
+<tr><td>17</td><td>Д.Н. Мамин-Сибиряк</td><td>Приёмыш</td><td></td></tr>
+<tr><td>18</td><td>А.И. Куприн</td><td>Барбос и Жулька</td><td></td></tr>
+<tr><td>19</td><td>В.П. Астафьев</td><td>Стрижонок Скрип</td><td></td></tr>
+<tr><td>20</td><td>П.П. Бажов</td><td>Серебряное копытце</td><td></td></tr>
+<tr><td>21</td><td>Е. Шварц</td><td>Сказка о потерянном времени</td><td></td></tr>
+<tr><td>22</td><td>Р. Брэдбери</td><td>Все лето в один день</td><td></td></tr>
+<tr><td>23</td><td>К.Г. Паустовский</td><td>Корзина с еловыми шишками, Дремучий медведь</td><td></td></tr>
+<tr><td>24</td><td>М.М. Зощенко</td><td>Ёлка</td><td></td></tr>
+<tr><td>25</td><td>Б.С. Житков</td><td>Как я ловил человечков</td><td></td></tr>
+<tr><td>26</td><td>Г.Х. Андерсен</td><td>Русалочка</td><td></td></tr>
+<tr><td>27</td><td>В. Драгунский</td><td>Главные реки, Что любит Мишка</td><td></td></tr>
+<tr><td>28</td><td>Д. Барри</td><td>Питер Пен</td><td></td></tr>
+<tr><td>29</td><td>Ф. Баум</td><td>Страна Оз</td><td></td></tr>
+<tr><td>30</td><td>Т. Янссон</td><td>Сказки про Муми-тролля</td><td></td></tr>
+<tr><td>31</td><td>Е. Велтистов</td><td>Приключения Электроника</td><td></td></tr>
+<tr><td>32</td><td>Д. Свифт</td><td>Путешествия Гулливера</td><td></td></tr>
+</table></div>
+<div class="book-list"><h3>Календарный план</h3><div class="calendar-grid">
+<div class="calendar-header">Пн</div><div class="calendar-header">Вт</div><div class="calendar-header">Ср</div>
+<div class="calendar-header">Чт</div><div class="calendar-header">Пт</div><div class="calendar-header">Сб</div><div class="calendar-header">Вс</div>
+<div class="day-cell empty"></div>
+<div class="day-cell empty"></div>
+<div class="day-cell"><div class="day-date">27.05</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Сказка о мертвой царевне и о семи богатырях</div><div class="reading-author">А.С. Пушкин</div><div>День 1/1</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">28.05</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Конёк-Горбунок</div><div class="reading-author">П.П. Ершов</div><div>День 1/2</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">29.05</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Конёк-Горбунок</div><div class="reading-author">П.П. Ершов</div><div>День 2/2</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">30.05</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Маленький принц</div><div class="reading-author">А. Сент-Экзюпери</div><div>День 1/3</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">31.05</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Маленький принц</div><div class="reading-author">А. Сент-Экзюпери</div><div>День 2/3</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">01.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Маленький принц</div><div class="reading-author">А. Сент-Экзюпери</div><div>День 3/3</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">02.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Золотой ключик, или Приключения Буратино</div><div class="reading-author">А. Толстой</div><div>День 1/8</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">03.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Золотой ключик, или Приключения Буратино</div><div class="reading-author">А. Толстой</div><div>День 2/8</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">04.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Золотой ключик, или Приключения Буратино</div><div class="reading-author">А. Толстой</div><div>День 3/8</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">05.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Золотой ключик, или Приключения Буратино</div><div class="reading-author">А. Толстой</div><div>День 4/8</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">06.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Золотой ключик, или Приключения Буратино</div><div class="reading-author">А. Толстой</div><div>День 5/8</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">07.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Золотой ключик, или Приключения Буратино</div><div class="reading-author">А. Толстой</div><div>День 6/8</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">08.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Золотой ключик, или Приключения Буратино</div><div class="reading-author">А. Толстой</div><div>День 7/8</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">09.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Золотой ключик, или Приключения Буратино</div><div class="reading-author">А. Толстой</div><div>День 8/8</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">10.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Малыш и Карлсон</div><div class="reading-author">А. Линдгрен</div><div>День 1/10</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">11.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Малыш и Карлсон</div><div class="reading-author">А. Линдгрен</div><div>День 2/10</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">12.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Малыш и Карлсон</div><div class="reading-author">А. Линдгрен</div><div>День 3/10</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">13.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Малыш и Карлсон</div><div class="reading-author">А. Линдгрен</div><div>День 4/10</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">14.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Малыш и Карлсон</div><div class="reading-author">А. Линдгрен</div><div>День 5/10</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">15.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Малыш и Карлсон</div><div class="reading-author">А. Линдгрен</div><div>День 6/10</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">16.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Малыш и Карлсон</div><div class="reading-author">А. Линдгрен</div><div>День 7/10</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">17.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Малыш и Карлсон</div><div class="reading-author">А. Линдгрен</div><div>День 8/10</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">18.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Малыш и Карлсон</div><div class="reading-author">А. Линдгрен</div><div>День 9/10</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">19.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Малыш и Карлсон</div><div class="reading-author">А. Линдгрен</div><div>День 10/10</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">20.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Путешествия Алисы</div><div class="reading-author">К. Булычев</div><div>День 1/9</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">21.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Путешествия Алисы</div><div class="reading-author">К. Булычев</div><div>День 2/9</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">22.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Путешествия Алисы</div><div class="reading-author">К. Булычев</div><div>День 3/9</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">23.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Путешествия Алисы</div><div class="reading-author">К. Булычев</div><div>День 4/9</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">24.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Путешествия Алисы</div><div class="reading-author">К. Булычев</div><div>День 5/9</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">25.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Путешествия Алисы</div><div class="reading-author">К. Булычев</div><div>День 6/9</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">26.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Путешествия Алисы</div><div class="reading-author">К. Булычев</div><div>День 7/9</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">27.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Путешествия Алисы</div><div class="reading-author">К. Булычев</div><div>День 8/9</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">28.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Путешествия Алисы</div><div class="reading-author">К. Булычев</div><div>День 9/9</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">29.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Приключения Тома Сойера</div><div class="reading-author">М. Твен</div><div>День 1/13</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">30.06</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Приключения Тома Сойера</div><div class="reading-author">М. Твен</div><div>День 2/13</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">01.07</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Приключения Тома Сойера</div><div class="reading-author">М. Твен</div><div>День 3/13</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">02.07</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Приключения Тома Сойера</div><div class="reading-author">М. Твен</div><div>День 4/13</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">03.07</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Приключения Тома Сойера</div><div class="reading-author">М. Твен</div><div>День 5/13</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">04.07</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Приключения Тома Сойера</div><div class="reading-author">М. Твен</div><div>День 6/13</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">05.07</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Приключения Тома Сойера</div><div class="reading-author">М. Твен</div><div>День 7/13</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">06.07</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Приключения Тома Сойера</div><div class="reading-author">М. Твен</div><div>День 8/13</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">07.07</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Приключения Тома Сойера</div><div class="reading-author">М. Твен</div><div>День 9/13</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">08.07</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Приключения Тома Сойера</div><div class="reading-author">М. Твен</div><div>День 10/13</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">09.07</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Приключения Тома Сойера</div><div class="reading-author">М. Твен</div><div>День 11/13</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">10.07</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Приключения Тома Сойера</div><div class="reading-author">М. Твен</div><div>День 12/13</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">11.07</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Приключения Тома Сойера</div><div class="reading-author">М. Твен</div><div>День 13/13</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">12.07</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Приключения Незнайки и его друзей</div><div class="reading-author">Н. Носов</div><div>День 1/12</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">13.07</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Приключения Незнайки и его друзей</div><div class="reading-author">Н. Носов</div><div>День 2/12</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">14.07</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Приключения Незнайки и его друзей</div><div class="reading-author">Н. Носов</div><div>День 3/12</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">15.07</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Приключения Незнайки и его друзей</div><div class="reading-author">Н. Носов</div><div>День 4/12</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">16.07</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Приключения Незнайки и его друзей</div><div class="reading-author">Н. Носов</div><div>День 5/12</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">17.07</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Приключения Незнайки и его друзей</div><div class="reading-author">Н. Носов</div><div>День 6/12</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">18.07</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Приключения Незнайки и его друзей</div><div class="reading-author">Н. Носов</div><div>День 7/12</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">19.07</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Приключения Незнайки и его друзей</div><div class="reading-author">Н. Носов</div><div>День 8/12</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">20.07</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Приключения Незнайки и его друзей</div><div class="reading-author">Н. Носов</div><div>День 9/12</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">21.07</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Приключения Незнайки и его друзей</div><div class="reading-author">Н. Носов</div><div>День 10/12</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">22.07</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Приключения Незнайки и его друзей</div><div class="reading-author">Н. Носов</div><div>День 11/12</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">23.07</div><div class="reading-block" style="background:#e74c3c"><div class="reading-title">Приключения Незнайки и его друзей</div><div class="reading-author">Н. Носов</div><div>День 12/12</div><span class="required-badge">ОБЯЗАТЕЛЬНО</span></div></div>
+<div class="day-cell"><div class="day-date">24.07</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Волк и журавль, Квартет</div><div class="reading-author">И.А. Крылов</div><div>День 1/1</div></div></div>
+<div class="day-cell"><div class="day-date">25.07</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Городок в табакерке</div><div class="reading-author">В.Ф. Одоевский</div><div>День 1/1</div></div></div>
+<div class="day-cell"><div class="day-date">26.07</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Сказка о жабе и розе</div><div class="reading-author">В. Гаршин</div><div>День 1/1</div></div></div>
+<div class="day-cell"><div class="day-date">27.07</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Ашик-Кериб</div><div class="reading-author">М.Ю. Лермонтов</div><div>День 1/1</div></div></div>
+<div class="day-cell"><div class="day-date">28.07</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Мальчики</div><div class="reading-author">А.П. Чехов</div><div>День 1/1</div></div></div>
+<div class="day-cell"><div class="day-date">29.07</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Аленький цветочек</div><div class="reading-author">С.Т. Аксаков</div><div>День 1/2</div></div></div>
+<div class="day-cell"><div class="day-date">30.07</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Аленький цветочек</div><div class="reading-author">С.Т. Аксаков</div><div>День 2/2</div></div></div>
+<div class="day-cell"><div class="day-date">31.07</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Кусака</div><div class="reading-author">Л. Андреев</div><div>День 1/1</div></div></div>
+<div class="day-cell"><div class="day-date">01.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Оранжевое горлышко</div><div class="reading-author">В. Бианки</div><div>День 1/1</div></div></div>
+<div class="day-cell"><div class="day-date">02.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Приёмыш</div><div class="reading-author">Д.Н. Мамин-Сибиряк</div><div>День 1/1</div></div></div>
+<div class="day-cell"><div class="day-date">03.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Барбос и Жулька</div><div class="reading-author">А.И. Куприн</div><div>День 1/1</div></div></div>
+<div class="day-cell"><div class="day-date">04.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Стрижонок Скрип</div><div class="reading-author">В.П. Астафьев</div><div>День 1/1</div></div></div>
+<div class="day-cell"><div class="day-date">05.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Серебряное копытце</div><div class="reading-author">П.П. Бажов</div><div>День 1/1</div></div></div>
+<div class="day-cell"><div class="day-date">06.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Сказка о потерянном времени</div><div class="reading-author">Е. Шварц</div><div>День 1/1</div></div></div>
+<div class="day-cell"><div class="day-date">07.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Все лето в один день</div><div class="reading-author">Р. Брэдбери</div><div>День 1/1</div></div></div>
+<div class="day-cell"><div class="day-date">08.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Корзина с еловыми шишками, Дремучий медведь</div><div class="reading-author">К.Г. Паустовский</div><div>День 1/1</div></div></div>
+<div class="day-cell"><div class="day-date">09.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Ёлка</div><div class="reading-author">М.М. Зощенко</div><div>День 1/1</div></div></div>
+<div class="day-cell"><div class="day-date">10.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Как я ловил человечков</div><div class="reading-author">Б.С. Житков</div><div>День 1/1</div></div></div>
+<div class="day-cell"><div class="day-date">11.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Русалочка</div><div class="reading-author">Г.Х. Андерсен</div><div>День 1/2</div></div></div>
+<div class="day-cell"><div class="day-date">12.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Русалочка</div><div class="reading-author">Г.Х. Андерсен</div><div>День 2/2</div></div></div>
+<div class="day-cell"><div class="day-date">13.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Главные реки, Что любит Мишка</div><div class="reading-author">В. Драгунский</div><div>День 1/1</div></div></div>
+<div class="day-cell"><div class="day-date">14.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Питер Пен</div><div class="reading-author">Д. Барри</div><div>День 1/6</div></div></div>
+<div class="day-cell"><div class="day-date">15.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Питер Пен</div><div class="reading-author">Д. Барри</div><div>День 2/6</div></div></div>
+<div class="day-cell"><div class="day-date">16.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Питер Пен</div><div class="reading-author">Д. Барри</div><div>День 3/6</div></div></div>
+<div class="day-cell"><div class="day-date">17.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Питер Пен</div><div class="reading-author">Д. Барри</div><div>День 4/6</div></div></div>
+<div class="day-cell"><div class="day-date">18.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Питер Пен</div><div class="reading-author">Д. Барри</div><div>День 5/6</div></div></div>
+<div class="day-cell"><div class="day-date">19.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Питер Пен</div><div class="reading-author">Д. Барри</div><div>День 6/6</div></div></div>
+<div class="day-cell"><div class="day-date">20.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Страна Оз</div><div class="reading-author">Ф. Баум</div><div>День 1/7</div></div></div>
+<div class="day-cell"><div class="day-date">21.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Страна Оз</div><div class="reading-author">Ф. Баум</div><div>День 2/7</div></div></div>
+<div class="day-cell"><div class="day-date">22.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Страна Оз</div><div class="reading-author">Ф. Баум</div><div>День 3/7</div></div></div>
+<div class="day-cell"><div class="day-date">23.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Страна Оз</div><div class="reading-author">Ф. Баум</div><div>День 4/7</div></div></div>
+<div class="day-cell"><div class="day-date">24.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Страна Оз</div><div class="reading-author">Ф. Баум</div><div>День 5/7</div></div></div>
+<div class="day-cell"><div class="day-date">25.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Страна Оз</div><div class="reading-author">Ф. Баум</div><div>День 6/7</div></div></div>
+<div class="day-cell"><div class="day-date">26.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Страна Оз</div><div class="reading-author">Ф. Баум</div><div>День 7/7</div></div></div>
+<div class="day-cell"><div class="day-date">27.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Сказки про Муми-тролля</div><div class="reading-author">Т. Янссон</div><div>День 1/6</div></div></div>
+<div class="day-cell"><div class="day-date">28.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Сказки про Муми-тролля</div><div class="reading-author">Т. Янссон</div><div>День 2/6</div></div></div>
+<div class="day-cell"><div class="day-date">29.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Сказки про Муми-тролля</div><div class="reading-author">Т. Янссон</div><div>День 3/6</div></div></div>
+<div class="day-cell"><div class="day-date">30.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Сказки про Муми-тролля</div><div class="reading-author">Т. Янссон</div><div>День 4/6</div></div></div>
+<div class="day-cell"><div class="day-date">31.08</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Сказки про Муми-тролля</div><div class="reading-author">Т. Янссон</div><div>День 5/6</div></div></div>
+<div class="day-cell"><div class="day-date">01.09</div><div class="reading-block" style="background:#3498db"><div class="reading-title">Сказки про Муми-тролля</div><div class="reading-author">Т. Янссон</div><div>День 6/6</div></div></div>
+</div></div>
+<div class="footer"><p>План составлен автоматически.</p></div>
+</div></body></html>
