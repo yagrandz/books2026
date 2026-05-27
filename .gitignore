@@ -1,1 +1,1 @@
-Nothing needs to be added to .gitignore since only a single HTML file was added without any build artifacts, dependencies, or temporary files.
+Nothing needs to be added to the .gitignore file based on the provided file changes. The only modified file is 'print.html', which is a source file and should not be ignored.
