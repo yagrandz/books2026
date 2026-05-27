@@ -13,7 +13,7 @@
             padding: 20px;
         }
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
             background: white;
             padding: 30px;
@@ -37,10 +37,31 @@
             margin-bottom: 20px;
             border-radius: 4px;
         }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+            justify-content: center;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.85em;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+            margin-right: 6px;
+            border: 1px solid rgba(0,0,0,0.2);
+        }
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 10px;
+            gap: 8px;
             margin-top: 20px;
         }
         .calendar-header {
@@ -55,8 +76,8 @@
             background-color: #fff;
             border: 1px solid #ddd;
             border-radius: 4px;
-            padding: 10px;
-            min-height: 120px;
+            padding: 8px;
+            min-height: 100px;
             display: flex;
             flex-direction: column;
         }
@@ -67,38 +88,40 @@
         .day-date {
             font-weight: bold;
             color: #2c3e50;
-            margin-bottom: 8px;
-            font-size: 0.9em;
-        }
-        .book-item {
-            font-size: 0.85em;
             margin-bottom: 6px;
-            padding: 4px;
-            background-color: #f8f9fa;
-            border-radius: 3px;
+            font-size: 0.85em;
+            text-align: center;
         }
-        .book-author {
-            color: #7f8c8d;
-            font-size: 0.8em;
+        .reading-block {
+            font-size: 0.75em;
+            padding: 3px 5px;
+            border-radius: 3px;
+            margin-bottom: 3px;
+            color: #fff;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+        }
+        .reading-title {
+            font-weight: bold;
             margin-bottom: 2px;
         }
-        .book-title {
-            color: #2c3e50;
+        .reading-author {
+            font-size: 0.85em;
+            opacity: 0.9;
         }
-        .required {
-            border-left: 3px solid #e74c3c;
-            background-color: #fdf2f0;
-        }
-        .badge {
+        .required-badge {
             display: inline-block;
-            padding: 2px 6px;
-            font-size: 0.75em;
-            border-radius: 4px;
-            background-color: #e74c3c;
+            padding: 1px 4px;
+            font-size: 0.7em;
+            border-radius: 3px;
+            background-color: rgba(255,255,255,0.3);
             color: white;
-            margin-left: 4px;
-            font-weight: normal;
-            vertical-align: middle;
+            margin-top: 2px;
+            font-weight: bold;
         }
         .footer {
             margin-top: 30px;
@@ -106,9 +129,18 @@
             font-size: 0.9em;
             color: #777;
         }
+        @media (max-width: 1024px) {
+            .calendar-grid {
+                grid-template-columns: repeat(5, 1fr);
+            }
+        }
         @media (max-width: 768px) {
             .calendar-grid {
                 grid-template-columns: repeat(3, 1fr);
+            }
+            .legend {
+                flex-direction: column;
+                align-items: center;
             }
         }
         @media (max-width: 480px) {
@@ -121,12 +153,14 @@
 <body>
 
 <div class="container">
-    <h1>Список книг на лето (2-3 класс)</h1>
+    <h1>План летнего чтения: 2-3 класс</h1>
     <h2>Календарь чтения: 27 мая — 1 сентября 2026</h2>
-
+    
     <div class="info-box">
-        <p><strong>Важно:</strong> Книги, отмеченные значком <span class="badge">Обязательно</span>, необходимо прочитать в первую очередь и завести дневник внеклассного чтения.</p>
+        <p><strong>Как пользоваться:</strong> Каждая книга имеет свой цвет. Закрашенные дни показывают, когда нужно читать эту книгу. Обязательные книги отмечены значком.</p>
     </div>
+    
+    <div class="legend" id="legend"></div>
 
     <div class="calendar-grid">
         <div class="calendar-header">Пн</div>
@@ -145,109 +179,158 @@
         <div class="day-cell empty"></div>
         <div class="day-cell">
             <div class="day-date">27 мая</div>
-            <div class="book-item required">
-                <div class="book-author">А.С. Пушкин</div>
-                <div class="book-title">«Сказка о мёртвой царевне» <span class="badge">Обязательно</span></div>
+            <div class="reading-block" style="background-color: #e74c3c;">
+                <div class="reading-title">Сказка о мёртвой царевне</div>
+                <div class="reading-author">А.С. Пушкин</div>
+                <div class="required-badge">Обязательно</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">28 мая</div>
+            <div class="reading-block" style="background-color: #e74c3c;">
+                <div class="reading-title">Сказка о мёртвой царевне</div>
+                <div class="reading-author">А.С. Пушкин</div>
+                <div class="required-badge">Обязательно</div>
             </div>
         </div>
         <div class="day-cell empty"></div>
         <div class="day-cell empty"></div>
         <div class="day-cell empty"></div>
         <div class="day-cell">
-            <div class="day-date">30 мая</div>
-            <div class="book-item">
-                <div class="book-author">И.А. Крылов</div>
-                <div class="book-title">«Волк и журавль», «Квартет»</div>
+            <div class="day-date">31 мая</div>
+            <div class="reading-block" style="background-color: #3498db;">
+                <div class="reading-title">Волк и журавль, Квартет</div>
+                <div class="reading-author">И.А. Крылов</div>
             </div>
         </div>
-        <div class="day-cell empty"></div>
-        <div class="day-cell empty"></div>
-        <div class="day-cell empty"></div>
 
         <!-- Июнь 2026 -->
         <div class="day-cell empty"></div>
         <div class="day-cell">
             <div class="day-date">2 июня</div>
-            <div class="book-item">
-                <div class="book-author">В.Ф. Одоевский</div>
-                <div class="book-title">«Городок в табакерке»</div>
+            <div class="reading-block" style="background-color: #9b59b6;">
+                <div class="reading-title">Городок в табакерке</div>
+                <div class="reading-author">В.Ф. Одоевский</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">3 июня</div>
+            <div class="reading-block" style="background-color: #9b59b6;">
+                <div class="reading-title">Городок в табакерке</div>
+                <div class="reading-author">В.Ф. Одоевский</div>
             </div>
         </div>
         <div class="day-cell empty"></div>
         <div class="day-cell">
             <div class="day-date">5 июня</div>
-            <div class="book-item">
-                <div class="book-author">В. Гаршин</div>
-                <div class="book-title">«Сказка о жабе и розе»</div>
+            <div class="reading-block" style="background-color: #1abc9c;">
+                <div class="reading-title">Сказка о жабе и розе</div>
+                <div class="reading-author">В. Гаршин</div>
             </div>
         </div>
         <div class="day-cell empty"></div>
         <div class="day-cell empty"></div>
         <div class="day-cell">
             <div class="day-date">8 июня</div>
-            <div class="book-item">
-                <div class="book-author">М.Ю. Лермонтов</div>
-                <div class="book-title">«Ашик-Кериб»</div>
+            <div class="reading-block" style="background-color: #f39c12;">
+                <div class="reading-title">Ашик-Кериб</div>
+                <div class="reading-author">М.Ю. Лермонтов</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">9 июня</div>
+            <div class="reading-block" style="background-color: #f39c12;">
+                <div class="reading-title">Ашик-Кериб</div>
+                <div class="reading-author">М.Ю. Лермонтов</div>
             </div>
         </div>
         <div class="day-cell empty"></div>
         <div class="day-cell empty"></div>
         <div class="day-cell">
             <div class="day-date">11 июня</div>
-            <div class="book-item">
-                <div class="book-author">А.П. Чехов</div>
-                <div class="book-title">«Мальчики»</div>
+            <div class="reading-block" style="background-color: #2ecc71;">
+                <div class="reading-title">Мальчики</div>
+                <div class="reading-author">А.П. Чехов</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">12 июня</div>
+            <div class="reading-block" style="background-color: #2ecc71;">
+                <div class="reading-title">Мальчики</div>
+                <div class="reading-author">А.П. Чехов</div>
             </div>
         </div>
         <div class="day-cell empty"></div>
         <div class="day-cell">
             <div class="day-date">14 июня</div>
-            <div class="book-item">
-                <div class="book-author">С.Т. Аксаков</div>
-                <div class="book-title">«Аленький цветочек»</div>
+            <div class="reading-block" style="background-color: #e67e22;">
+                <div class="reading-title">Аленький цветочек</div>
+                <div class="reading-author">С.Т. Аксаков</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">15 июня</div>
+            <div class="reading-block" style="background-color: #e67e22;">
+                <div class="reading-title">Аленький цветочек</div>
+                <div class="reading-author">С.Т. Аксаков</div>
             </div>
         </div>
         <div class="day-cell empty"></div>
         <div class="day-cell empty"></div>
         <div class="day-cell">
             <div class="day-date">17 июня</div>
-            <div class="book-item">
-                <div class="book-author">Л. Андреев</div>
-                <div class="book-title">«Кусака»</div>
+            <div class="reading-block" style="background-color: #95a5a6;">
+                <div class="reading-title">Кусака</div>
+                <div class="reading-author">Л. Андреев</div>
             </div>
         </div>
         <div class="day-cell empty"></div>
+        <div class="day-cell empty"></div>
         <div class="day-cell">
             <div class="day-date">20 июня</div>
-            <div class="book-item">
-                <div class="book-author">В. Бианки</div>
-                <div class="book-title">«Оранжевое горлышко»</div>
+            <div class="reading-block" style="background-color: #16a085;">
+                <div class="reading-title">Оранжевое горлышко</div>
+                <div class="reading-author">В. Бианки</div>
             </div>
         </div>
         <div class="day-cell empty"></div>
         <div class="day-cell empty"></div>
         <div class="day-cell">
             <div class="day-date">23 июня</div>
-            <div class="book-item">
-                <div class="book-author">Д.Н. Мамин-Сибиряк</div>
-                <div class="book-title">«Приёмыш»</div>
+            <div class="reading-block" style="background-color: #d35400;">
+                <div class="reading-title">Приёмыш</div>
+                <div class="reading-author">Д.Н. Мамин-Сибиряк</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">24 июня</div>
+            <div class="reading-block" style="background-color: #d35400;">
+                <div class="reading-title">Приёмыш</div>
+                <div class="reading-author">Д.Н. Мамин-Сибиряк</div>
             </div>
         </div>
         <div class="day-cell empty"></div>
         <div class="day-cell">
             <div class="day-date">26 июня</div>
-            <div class="book-item">
-                <div class="book-author">А.И. Куприн</div>
-                <div class="book-title">«Барбос и Жулька»</div>
+            <div class="reading-block" style="background-color: #7f8c8d;">
+                <div class="reading-title">Барбос и Жулька</div>
+                <div class="reading-author">А.И. Куприн</div>
             </div>
         </div>
         <div class="day-cell empty"></div>
         <div class="day-cell empty"></div>
         <div class="day-cell">
             <div class="day-date">29 июня</div>
-            <div class="book-item">
-                <div class="book-author">В.П. Астафьев</div>
-                <div class="book-title">«Стрижонок Скрип»</div>
+            <div class="reading-block" style="background-color: #27ae60;">
+                <div class="reading-title">Стрижонок Скрип</div>
+                <div class="reading-author">В.П. Астафьев</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">30 июня</div>
+            <div class="reading-block" style="background-color: #27ae60;">
+                <div class="reading-title">Стрижонок Скрип</div>
+                <div class="reading-author">В.П. Астафьев</div>
             </div>
         </div>
 
@@ -255,86 +338,137 @@
         <div class="day-cell empty"></div>
         <div class="day-cell">
             <div class="day-date">2 июля</div>
-            <div class="book-item required">
-                <div class="book-author">П.П. Ершов</div>
-                <div class="book-title">«Конёк-Горбунок» <span class="badge">Обязательно</span></div>
+            <div class="reading-block" style="background-color: #8e44ad;">
+                <div class="reading-title">Конёк-Горбунок</div>
+                <div class="reading-author">П.П. Ершов</div>
+                <div class="required-badge">Обязательно</div>
             </div>
         </div>
-        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">3 июля</div>
+            <div class="reading-block" style="background-color: #8e44ad;">
+                <div class="reading-title">Конёк-Горбунок</div>
+                <div class="reading-author">П.П. Ершов</div>
+                <div class="required-badge">Обязательно</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">4 июля</div>
+            <div class="reading-block" style="background-color: #8e44ad;">
+                <div class="reading-title">Конёк-Горбунок</div>
+                <div class="reading-author">П.П. Ершов</div>
+                <div class="required-badge">Обязательно</div>
+            </div>
+        </div>
         <div class="day-cell">
             <div class="day-date">5 июля</div>
-            <div class="book-item">
-                <div class="book-author">П.П. Бажов</div>
-                <div class="book-title">«Серебряное копытце»</div>
+            <div class="reading-block" style="background-color: #8e44ad;">
+                <div class="reading-title">Конёк-Горбунок</div>
+                <div class="reading-author">П.П. Ершов</div>
+                <div class="required-badge">Обязательно</div>
             </div>
         </div>
-        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">6 июля</div>
+            <div class="reading-block" style="background-color: #8e44ad;">
+                <div class="reading-title">Конёк-Горбунок</div>
+                <div class="reading-author">П.П. Ершов</div>
+                <div class="required-badge">Обязательно</div>
+            </div>
+        </div>
         <div class="day-cell empty"></div>
         <div class="day-cell">
             <div class="day-date">8 июля</div>
-            <div class="book-item">
-                <div class="book-author">Е. Шварц</div>
-                <div class="book-title">«Сказка о потерянном времени»</div>
+            <div class="reading-block" style="background-color: #c0392b;">
+                <div class="reading-title">Сказка о потерянном времени</div>
+                <div class="reading-author">Е. Шварц</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">9 июля</div>
+            <div class="reading-block" style="background-color: #c0392b;">
+                <div class="reading-title">Сказка о потерянном времени</div>
+                <div class="reading-author">Е. Шварц</div>
             </div>
         </div>
         <div class="day-cell empty"></div>
         <div class="day-cell empty"></div>
         <div class="day-cell">
-            <div class="day-date">11 июля</div>
-            <div class="book-item">
-                <div class="book-author">Р. Брэдбери</div>
-                <div class="book-title">«Все лето в один день»</div>
-            </div>
-        </div>
-        <div class="day-cell empty"></div>
-        <div class="day-cell">
-            <div class="day-date">14 июля</div>
-            <div class="book-item">
-                <div class="book-author">К.Г. Паустовский</div>
-                <div class="book-title">«Корзина с еловыми шишками»</div>
+            <div class="day-date">12 июля</div>
+            <div class="reading-block" style="background-color: #2980b9;">
+                <div class="reading-title">Все лето в один день</div>
+                <div class="reading-author">Р. Брэдбери</div>
             </div>
         </div>
         <div class="day-cell empty"></div>
         <div class="day-cell empty"></div>
         <div class="day-cell">
-            <div class="day-date">17 июля</div>
-            <div class="book-item">
-                <div class="book-author">М.М. Зощенко</div>
-                <div class="book-title">«Ёлка»</div>
+            <div class="day-date">15 июля</div>
+            <div class="reading-block" style="background-color: #f1c40f; color: #333; text-shadow: none;">
+                <div class="reading-title">Корзина с еловыми шишками</div>
+                <div class="reading-author">К.Г. Паустовский</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">16 июля</div>
+            <div class="reading-block" style="background-color: #f1c40f; color: #333; text-shadow: none;">
+                <div class="reading-title">Корзина с еловыми шишками</div>
+                <div class="reading-author">К.Г. Паустовский</div>
             </div>
         </div>
         <div class="day-cell empty"></div>
         <div class="day-cell">
-            <div class="day-date">20 июля</div>
-            <div class="book-item">
-                <div class="book-author">Б.С. Житков</div>
-                <div class="book-title">«Как я ловил человечков»</div>
+            <div class="day-date">18 июля</div>
+            <div class="reading-block" style="background-color: #16a085;">
+                <div class="reading-title">Ёлка</div>
+                <div class="reading-author">М.М. Зощенко</div>
             </div>
         </div>
         <div class="day-cell empty"></div>
         <div class="day-cell empty"></div>
         <div class="day-cell">
-            <div class="day-date">23 июля</div>
-            <div class="book-item">
-                <div class="book-author">Г.Х. Андерсен</div>
-                <div class="book-title">«Русалочка»</div>
+            <div class="day-date">21 июля</div>
+            <div class="reading-block" style="background-color: #d35400;">
+                <div class="reading-title">Как я ловил человечков</div>
+                <div class="reading-author">Б.С. Житков</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">22 июля</div>
+            <div class="reading-block" style="background-color: #d35400;">
+                <div class="reading-title">Как я ловил человечков</div>
+                <div class="reading-author">Б.С. Житков</div>
             </div>
         </div>
         <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">24 июля</div>
+            <div class="reading-block" style="background-color: #34495e;">
+                <div class="reading-title">Русалочка</div>
+                <div class="reading-author">Г.Х. Андерсен</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">25 июля</div>
+            <div class="reading-block" style="background-color: #34495e;">
+                <div class="reading-title">Русалочка</div>
+                <div class="reading-author">Г.Х. Андерсен</div>
+            </div>
+        </div>
         <div class="day-cell">
             <div class="day-date">26 июля</div>
-            <div class="book-item required">
-                <div class="book-author">А. Сент-Экзюпери</div>
-                <div class="book-title">«Маленький принц» <span class="badge">Обязательно</span></div>
+            <div class="reading-block" style="background-color: #34495e;">
+                <div class="reading-title">Русалочка</div>
+                <div class="reading-author">Г.Х. Андерсен</div>
             </div>
         </div>
         <div class="day-cell empty"></div>
         <div class="day-cell empty"></div>
         <div class="day-cell">
             <div class="day-date">29 июля</div>
-            <div class="book-item">
-                <div class="book-author">В. Драгунский</div>
-                <div class="book-title">«Главные реки», «Что любит Мишка»</div>
+            <div class="reading-block" style="background-color: #7f8c8d;">
+                <div class="reading-title">Главные реки, Что любит Мишка</div>
+                <div class="reading-author">В. Драгунский</div>
             </div>
         </div>
 
@@ -342,69 +476,183 @@
         <div class="day-cell empty"></div>
         <div class="day-cell">
             <div class="day-date">1 августа</div>
-            <div class="book-item required">
-                <div class="book-author">А. Толстой</div>
-                <div class="book-title">«Золотой ключик» <span class="badge">Обязательно</span></div>
+            <div class="reading-block" style="background-color: #c0392b;">
+                <div class="reading-title">Золотой ключик</div>
+                <div class="reading-author">А. Толстой</div>
+                <div class="required-badge">Обязательно</div>
             </div>
         </div>
-        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">2 августа</div>
+            <div class="reading-block" style="background-color: #c0392b;">
+                <div class="reading-title">Золотой ключик</div>
+                <div class="reading-author">А. Толстой</div>
+                <div class="required-badge">Обязательно</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">3 августа</div>
+            <div class="reading-block" style="background-color: #c0392b;">
+                <div class="reading-title">Золотой ключик</div>
+                <div class="reading-author">А. Толстой</div>
+                <div class="required-badge">Обязательно</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">4 августа</div>
+            <div class="reading-block" style="background-color: #c0392b;">
+                <div class="reading-title">Золотой ключик</div>
+                <div class="reading-author">А. Толстой</div>
+                <div class="required-badge">Обязательно</div>
+            </div>
+        </div>
         <div class="day-cell">
             <div class="day-date">5 августа</div>
-            <div class="book-item">
-                <div class="book-author">Д. Барри</div>
-                <div class="book-title">«Питер Пен»</div>
+            <div class="reading-block" style="background-color: #c0392b;">
+                <div class="reading-title">Золотой ключик</div>
+                <div class="reading-author">А. Толстой</div>
+                <div class="required-badge">Обязательно</div>
             </div>
         </div>
         <div class="day-cell empty"></div>
-        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">7 августа</div>
+            <div class="reading-block" style="background-color: #2980b9;">
+                <div class="reading-title">Питер Пен</div>
+                <div class="reading-author">Д. Барри</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">8 августа</div>
+            <div class="reading-block" style="background-color: #2980b9;">
+                <div class="reading-title">Питер Пен</div>
+                <div class="reading-author">Д. Барри</div>
+            </div>
+        </div>
         <div class="day-cell">
             <div class="day-date">9 августа</div>
-            <div class="book-item">
-                <div class="book-author">Ф. Баум</div>
-                <div class="book-title">«Страна Оз»</div>
+            <div class="reading-block" style="background-color: #2980b9;">
+                <div class="reading-title">Питер Пен</div>
+                <div class="reading-author">Д. Барри</div>
             </div>
         </div>
         <div class="day-cell empty"></div>
         <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">12 августа</div>
+            <div class="reading-block" style="background-color: #8e44ad;">
+                <div class="reading-title">Страна Оз</div>
+                <div class="reading-author">Ф. Баум</div>
+            </div>
+        </div>
         <div class="day-cell">
             <div class="day-date">13 августа</div>
-            <div class="book-item">
-                <div class="book-author">Т. Янссон</div>
-                <div class="book-title">Сказки про Муми-тролля</div>
+            <div class="reading-block" style="background-color: #8e44ad;">
+                <div class="reading-title">Страна Оз</div>
+                <div class="reading-author">Ф. Баум</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">14 августа</div>
+            <div class="reading-block" style="background-color: #8e44ad;">
+                <div class="reading-title">Страна Оз</div>
+                <div class="reading-author">Ф. Баум</div>
             </div>
         </div>
         <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">16 августа</div>
+            <div class="reading-block" style="background-color: #27ae60;">
+                <div class="reading-title">Сказки про Муми-тролля</div>
+                <div class="reading-author">Т. Янссон</div>
+            </div>
+        </div>
         <div class="day-cell">
             <div class="day-date">17 августа</div>
-            <div class="book-item required">
-                <div class="book-author">А. Линдгрен</div>
-                <div class="book-title">«Малыш и Карлсон» <span class="badge">Обязательно</span></div>
+            <div class="reading-block" style="background-color: #27ae60;">
+                <div class="reading-title">Сказки про Муми-тролля</div>
+                <div class="reading-author">Т. Янссон</div>
             </div>
         </div>
         <div class="day-cell empty"></div>
         <div class="day-cell empty"></div>
         <div class="day-cell">
+            <div class="day-date">20 августа</div>
+            <div class="reading-block" style="background-color: #e74c3c;">
+                <div class="reading-title">Малыш и Карлсон</div>
+                <div class="reading-author">А. Линдгрен</div>
+                <div class="required-badge">Обязательно</div>
+            </div>
+        </div>
+        <div class="day-cell">
             <div class="day-date">21 августа</div>
-            <div class="book-item">
-                <div class="book-author">Е. Велтистов</div>
-                <div class="book-title">«Приключения Электроника»</div>
+            <div class="reading-block" style="background-color: #e74c3c;">
+                <div class="reading-title">Малыш и Карлсон</div>
+                <div class="reading-author">А. Линдгрен</div>
+                <div class="required-badge">Обязательно</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">22 августа</div>
+            <div class="reading-block" style="background-color: #e74c3c;">
+                <div class="reading-title">Малыш и Карлсон</div>
+                <div class="reading-author">А. Линдгрен</div>
+                <div class="required-badge">Обязательно</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">23 августа</div>
+            <div class="reading-block" style="background-color: #e74c3c;">
+                <div class="reading-title">Малыш и Карлсон</div>
+                <div class="reading-author">А. Линдгрен</div>
+                <div class="required-badge">Обязательно</div>
             </div>
         </div>
         <div class="day-cell empty"></div>
         <div class="day-cell">
             <div class="day-date">25 августа</div>
-            <div class="book-item required">
-                <div class="book-author">К. Булычев</div>
-                <div class="book-title">«Путешествия Алисы» <span class="badge">Обязательно</span></div>
+            <div class="reading-block" style="background-color: #f39c12;">
+                <div class="reading-title">Приключения Электроника</div>
+                <div class="reading-author">Е. Велтистов</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">26 августа</div>
+            <div class="reading-block" style="background-color: #f39c12;">
+                <div class="reading-title">Приключения Электроника</div>
+                <div class="reading-author">Е. Велтистов</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">27 августа</div>
+            <div class="reading-block" style="background-color: #f39c12;">
+                <div class="reading-title">Приключения Электроника</div>
+                <div class="reading-author">Е. Велтистов</div>
             </div>
         </div>
         <div class="day-cell empty"></div>
-        <div class="day-cell empty"></div>
         <div class="day-cell">
             <div class="day-date">29 августа</div>
-            <div class="book-item required">
-                <div class="book-author">М. Твен</div>
-                <div class="book-title">«Приключения Тома Сойера» <span class="badge">Обязательно</span></div>
+            <div class="reading-block" style="background-color: #3498db;">
+                <div class="reading-title">Путешествия Алисы</div>
+                <div class="reading-author">К. Булычев</div>
+                <div class="required-badge">Обязательно</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">30 августа</div>
+            <div class="reading-block" style="background-color: #3498db;">
+                <div class="reading-title">Путешествия Алисы</div>
+                <div class="reading-author">К. Булычев</div>
+                <div class="required-badge">Обязательно</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">31 августа</div>
+            <div class="reading-block" style="background-color: #3498db;">
+                <div class="reading-title">Путешествия Алисы</div>
+                <div class="reading-author">К. Булычев</div>
+                <div class="required-badge">Обязательно</div>
             </div>
         </div>
 
@@ -412,22 +660,145 @@
         <div class="day-cell empty"></div>
         <div class="day-cell">
             <div class="day-date">1 сентября</div>
-            <div class="book-item required">
-                <div class="book-author">Н. Носов</div>
-                <div class="book-title">«Приключения Незнайки» <span class="badge">Обязательно</span></div>
+            <div class="reading-block" style="background-color: #9b59b6;">
+                <div class="reading-title">Приключения Тома Сойера</div>
+                <div class="reading-author">М. Твен</div>
+                <div class="required-badge">Обязательно</div>
             </div>
         </div>
-        <div class="day-cell empty"></div>
-        <div class="day-cell empty"></div>
-        <div class="day-cell empty"></div>
-        <div class="day-cell empty"></div>
-        <div class="day-cell empty"></div>
+        <div class="day-cell">
+            <div class="day-date">2 сентября</div>
+            <div class="reading-block" style="background-color: #9b59b6;">
+                <div class="reading-title">Приключения Тома Сойера</div>
+                <div class="reading-author">М. Твен</div>
+                <div class="required-badge">Обязательно</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">3 сентября</div>
+            <div class="reading-block" style="background-color: #9b59b6;">
+                <div class="reading-title">Приключения Тома Сойера</div>
+                <div class="reading-author">М. Твен</div>
+                <div class="required-badge">Обязательно</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">4 сентября</div>
+            <div class="reading-block" style="background-color: #9b59b6;">
+                <div class="reading-title">Приключения Тома Сойера</div>
+                <div class="reading-author">М. Твен</div>
+                <div class="required-badge">Обязательно</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">5 сентября</div>
+            <div class="reading-block" style="background-color: #9b59b6;">
+                <div class="reading-title">Приключения Тома Сойера</div>
+                <div class="reading-author">М. Твен</div>
+                <div class="required-badge">Обязательно</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">6 сентября</div>
+            <div class="reading-block" style="background-color: #1abc9c;">
+                <div class="reading-title">Приключения Незнайки</div>
+                <div class="reading-author">Н. Носов</div>
+                <div class="required-badge">Обязательно</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">7 сентября</div>
+            <div class="reading-block" style="background-color: #1abc9c;">
+                <div class="reading-title">Приключения Незнайки</div>
+                <div class="reading-author">Н. Носов</div>
+                <div class="required-badge">Обязательно</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">8 сентября</div>
+            <div class="reading-block" style="background-color: #1abc9c;">
+                <div class="reading-title">Приключения Незнайки</div>
+                <div class="reading-author">Н. Носов</div>
+                <div class="required-badge">Обязательно</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">9 сентября</div>
+            <div class="reading-block" style="background-color: #1abc9c;">
+                <div class="reading-title">Приключения Незнайки</div>
+                <div class="reading-author">Н. Носов</div>
+                <div class="required-badge">Обязательно</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">10 сентября</div>
+            <div class="reading-block" style="background-color: #1abc9c;">
+                <div class="reading-title">Приключения Незнайки</div>
+                <div class="reading-author">Н. Носов</div>
+                <div class="required-badge">Обязательно</div>
+            </div>
+        </div>
+        <div class="day-cell">
+            <div class="day-date">11 сентября</div>
+            <div class="reading-block" style="background-color: #1abc9c;">
+                <div class="reading-title">Приключения Незнайки</div>
+                <div class="reading-author">Н. Носов</div>
+                <div class="required-badge">Обязательно</div>
+            </div>
+        </div>
     </div>
 
     <div class="footer">
         <p>Не забудьте завести дневник внеклассного чтения (Дата, Автор, Название, Герои).</p>
     </div>
 </div>
+
+<script>
+    // Generate legend dynamically
+    const books = [
+        { title: "Сказка о мёртвой царевне", author: "А.С. Пушкин", color: "#e74c3c", required: true },
+        { title: "Волк и журавль, Квартет", author: "И.А. Крылов", color: "#3498db", required: false },
+        { title: "Городок в табакерке", author: "В.Ф. Одоевский", color: "#9b59b6", required: false },
+        { title: "Сказка о жабе и розе", author: "В. Гаршин", color: "#1abc9c", required: false },
+        { title: "Ашик-Кериб", author: "М.Ю. Лермонтов", color: "#f39c12", required: false },
+        { title: "Мальчики", author: "А.П. Чехов", color: "#2ecc71", required: false },
+        { title: "Аленький цветочек", author: "С.Т. Аксаков", color: "#e67e22", required: false },
+        { title: "Кусака", author: "Л. Андреев", color: "#95a5a6", required: false },
+        { title: "Оранжевое горлышко", author: "В. Бианки", color: "#16a085", required: false },
+        { title: "Приёмыш", author: "Д.Н. Мамин-Сибиряк", color: "#d35400", required: false },
+        { title: "Барбос и Жулька", author: "А.И. Куприн", color: "#7f8c8d", required: false },
+        { title: "Стрижонок Скрип", author: "В.П. Астафьев", color: "#27ae60", required: false },
+        { title: "Конёк-Горбунок", author: "П.П. Ершов", color: "#8e44ad", required: true },
+        { title: "Сказка о потерянном времени", author: "Е. Шварц", color: "#c0392b", required: false },
+        { title: "Все лето в один день", author: "Р. Брэдбери", color: "#2980b9", required: false },
+        { title: "Корзина с еловыми шишками", author: "К.Г. Паустовский", color: "#f1c40f", required: false },
+        { title: "Ёлка", author: "М.М. Зощенко", color: "#16a085", required: false },
+        { title: "Как я ловил человечков", author: "Б.С. Житков", color: "#d35400", required: false },
+        { title: "Русалочка", author: "Г.Х. Андерсен", color: "#34495e", required: false },
+        { title: "Главные реки, Что любит Мишка", author: "В. Драгунский", color: "#7f8c8d", required: false },
+        { title: "Золотой ключик", author: "А. Толстой", color: "#c0392b", required: true },
+        { title: "Питер Пен", author: "Д. Барри", color: "#2980b9", required: false },
+        { title: "Страна Оз", author: "Ф. Баум", color: "#8e44ad", required: false },
+        { title: "Сказки про Муми-тролля", author: "Т. Янссон", color: "#27ae60", required: false },
+        { title: "Малыш и Карлсон", author: "А. Линдгрен", color: "#e74c3c", required: true },
+        { title: "Приключения Электроника", author: "Е. Велтистов", color: "#f39c12", required: false },
+        { title: "Путешествия Алисы", author: "К. Булычев", color: "#3498db", required: true },
+        { title: "Приключения Тома Сойера", author: "М. Твен", color: "#9b59b6", required: true },
+        { title: "Приключения Незнайки", author: "Н. Носов", color: "#1abc9c", required: true }
+    ];
+
+    const legendContainer = document.getElementById('legend');
+    books.forEach(book => {
+        const item = document.createElement('div');
+        item.className = 'legend-item';
+        item.style.backgroundColor = book.color + '20';
+        item.innerHTML = `
+            <div class="legend-color" style="background-color: ${book.color};"></div>
+            <span>${book.title} ${book.required ? '<span class="required-badge">Обязательно</span>' : ''}</span>
+        `;
+        legendContainer.appendChild(item);
+    });
+</script>
 
 </body>
 </html>
